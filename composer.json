@@ -7,25 +7,26 @@
     "authors": [
         {
             "name": "Christian Ascone",
-            "email": "ascone.christian@gmail.com"
+            "email": "ascone.christian@gmail.com",
+            "role": "Developer"
         },
         {
             "name": "Alessandro Nadalin",
             "email": "alessandro.nadalin@gmail.com",
             "homepage": "http://www.odino.org",
-            "__comment": "Original repository authors"
+            "role": "Original repository authors"
         },
         {
             "name": "David Funaro",
             "email": "ing.davidino@gmail.com",
             "homepage": "http://davidfunaro.com",
-            "__comment": "Original repository authors"
+            "role": "Original repository authors"
         },
         {
             "name": "Daniele Alessandri",
             "email": "suppakilla@gmail.com",
             "homepage": "http://clorophilla.net",
-            "__comment": "Original repository authors"
+            "role": "Original repository authors"
         }
     ],
     "autoload": {
