@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="true"
+         bootstrap="test/PHPUnit/bootstrap.php"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="false"
+         mapTestClassNameToCoveredClassName="false"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         syntaxCheck="false"
+         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
+         strict="false"
+         verbose="false">
+
+    <testsuites>
+        <testsuite name="OrientDB Client">
+            <directory>test/Doctrine/OrientDB</directory>
+        </testsuite>
+        <testsuite name="OrientDB ODM">
+            <directory>test/Doctrine/ODM/OrientDB</directory>
+        </testsuite>
+    </testsuites>
+
+    <groups>
+        <!--
+        <exclude>
+            <group>integration</group>
+        </exclude>
+    -->
+    </groups>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/Doctrine/OrientDB/</directory>
+            <directory suffix=".php">src/Doctrine/ODM/OrientDB/</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <const name="TEST_ODB_HOST" value="127.0.0.1"/>
+        <const name="TEST_ODB_PORT" value="2480"/>
+        <const name="TEST_ODB_USER" value="admin"/>
+        <const name="TEST_ODB_PASSWORD" value="admin"/>
+        <const name="TEST_ODB_DATABASE" value="GratefulDeadConcerts"/>
+        <const name="TEST_ODB_TIMEOUT" value="30"/>
+    </php>
+</phpunit>
