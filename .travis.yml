@@ -9,7 +9,4 @@ before_script:
 script: bin/phpunit --group __nogroup__,integration
 notifications:
   email:
-    - alessandro.nadalin@gmail.com
-    - ing.davidino@gmail.com
-    - suppakilla@gmail.com
-    - weinmaster@gmail.com
+    - ascone.christian@gmail.com
