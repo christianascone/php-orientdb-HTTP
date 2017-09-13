@@ -1,8 +1,11 @@
 # OrientDB PHP Library
 
-[![Build Status](https://secure.travis-ci.org/doctrine/orientdb-odm.png?branch=master)](http://secure.travis-ci.org/doctrine/orientdb-odm)
-[![Total Downloads](https://poser.pugx.org/doctrine/orientdb-odm/downloads.png)](https://packagist.org/packages/doctrine/orientdb-odm)
-[![Latest Stable Version](https://poser.pugx.org/doctrine/orientdb-odm/v/stable.png)](https://packagist.org/packages/doctrine/orientdb-odm)
+[![Build Status](https://secure.travis-ci.org/christianascone/php-orientdb-HTTP.png?branch=master)](http://secure.travis-ci.org/christianascone/php-orientdb-HTTP)
+[![Total Downloads](https://poser.pugx.org/christianascone/php-orientdb-HTTP/downloads.png)](https://packagist.org/packages/christianascone/php-orientdb-HTTP)
+[![Latest Stable Version](https://poser.pugx.org/christianascone/php-orientdb-HTTP/v/stable.png)](https://packagist.org/packages/christianascone/php-orientdb-HTTP)
+
+This project is born from [doctrine/orientdb-odm](https://github.com/doctrine/orientdb-odm) project.
+
 ## What's Orient?
 
 A set of tools to use and manage any OrientDB instance from PHP.
@@ -13,7 +16,7 @@ Orient includes:
 * the query builder
 * the data mapper ( Object Graph Mapper )
 
-If you don't know [OrientDB](http://www.orientechnologies.com/) take a look at its [Documentation](http://code.google.com/p/orient).
+If you don't know [OrientDB](http://www.orientechnologies.com/) take a look at its [Documentation](http://orientdb.com/docs/last/index.html).
 
 
 ## After cloning
@@ -169,7 +172,7 @@ In order to launch the test suite PHPUnit 3.6 is required.
 
 ## Tracker & software lifecycle
 
-See: https://github.com/doctrine/orientdb-odm/issues
+See: https://github.com/christianascone/php-orientdb-HTTP/issues
 
 
 ## Further documentation
