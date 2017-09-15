@@ -64,8 +64,7 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
     public function getResult()
     {
         $json = $this->getData();
-        $result = isset($json->result) ? $json->result : null;
-
+        $result = isset($json->result) ? $json->result : (isset($json) ? $json : null);
         return $result;
     }
 
@@ -78,7 +77,8 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
     public function getResultAsRecord()
     {
         $json = $this->getData();
-        $result = isset($json->result) ? $json->result : null;
+
+        $result = isset($json->result) ? $json->result : (isset($json) ? $json : null);
 
         $result_record = [];
 
@@ -89,6 +89,17 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
         }
 
         return $result_record;
+    }
+
+    /**
+     * Extract every item from received Record
+     * and convert into JSON string
+     * @return string
+     */
+
+    public function getRecordAsString($record = null){
+       return  (string)\GuzzleHttp\json_encode($record ?: $this->getData());
+
     }
 
     /**
