@@ -1,5 +1,5 @@
 {
-    "name": "christianascone/php-orientdb-HTTP",
+    "name": "christianascone/php-orientdb-http",
     "type": "library",
     "description": "A set of PHP libraries in order to use OrientDB from PHP with HTTP Protocol.",
     "keywords": ["orientdb"],
