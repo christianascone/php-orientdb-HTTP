@@ -279,6 +279,7 @@ class HttpBinding implements HttpBindingInterface
     }
 
     /**
+    /**
      * {@inheritdoc}
      */
     public function command($query, $language = BindingInterface::LANGUAGE_SQLPLUS, $database = null)

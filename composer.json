@@ -1,7 +1,7 @@
 {
     "name": "christianascone/orientdb-odm",
     "type": "library",
-    "description": "A set of PHP libraries in order to use OrientDB from PHP.",
+    "description": "A set of PHP libraries in order to use OrientDB from PHP with HTTP Protocol.",
     "keywords": ["orientdb"],
     "license": "MIT",
     "authors": [

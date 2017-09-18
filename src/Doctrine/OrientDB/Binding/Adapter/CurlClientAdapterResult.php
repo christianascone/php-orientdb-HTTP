@@ -19,6 +19,7 @@
 
 namespace Doctrine\OrientDB\Binding\Adapter;
 
+use Doctrine\ODM\OrientDB\Data\Record;
 use Doctrine\OrientDB\Binding\HttpBindingResultInterface;
 use Doctrine\OrientDB\Binding\InvalidQueryException;
 use Doctrine\OrientDB\Binding\Client\Http\CurlClientResponse;
@@ -63,9 +64,42 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
     public function getResult()
     {
         $json = $this->getData();
-        $result = isset($json->result) ? $json->result : null;
-
+        $result = isset($json->result) ? $json->result : (isset($json) ? $json : null);
         return $result;
+    }
+
+    /**
+     * Extract the ResultSet as Object parsed
+     * from received JSON and convert every item into
+     * a Record
+     * @return Array List of received Record
+     */
+    public function getResultAsRecord()
+    {
+        $json = $this->getData();
+
+        $result = isset($json->result) ? $json->result : (isset($json) ? $json : null);
+
+        $result_record = [];
+
+        if($result){
+            foreach ($result as $item) {
+                $result_record[] = new Record($item);
+            }
+        }
+
+        return $result_record;
+    }
+
+    /**
+     * Extract every item from received Record
+     * and convert into JSON string
+     * @return string
+     */
+
+    public function getRecordAsString($record = null){
+       return  (string)\GuzzleHttp\json_encode($record ?: $this->getData());
+
     }
 
     /**
