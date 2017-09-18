@@ -13,3 +13,4 @@ ci-stuff/environment
 vendor/
 composer.phar
 bin/phpunit
+custom_example.php
