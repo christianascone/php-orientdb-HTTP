@@ -281,9 +281,7 @@ class Record {
     }
 
     public function getRecordToPost(){
-
         return json_encode($this->getoData() + array('@rid'=>$this->getRid()->jsonSerialize()));
-
     }
 
 }
