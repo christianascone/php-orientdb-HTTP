@@ -276,4 +276,14 @@ class Record {
         $this->offsetSet( $name, $value );
     }
 
+    public function getoDataString(){
+        return json_encode($this->getoData());
+    }
+
+    public function getRecordToPost(){
+
+        return json_encode($this->getoData() + array('@rid'=>$this->getRid()->jsonSerialize()));
+
+    }
+
 }
