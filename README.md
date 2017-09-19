@@ -1,4 +1,4 @@
-# OrientDB PHP Library
+# OrientDB PHP Library for HTTP by [Luna](http://www.lunaflpartner.it/)
 
 [![Build Status](https://secure.travis-ci.org/christianascone/php-orientdb-HTTP.png?branch=master)](http://secure.travis-ci.org/christianascone/php-orientdb-HTTP)
 [![Total Downloads](https://poser.pugx.org/christianascone/php-orientdb-HTTP/downloads.png)](https://packagist.org/packages/christianascone/php-orientdb-HTTP)
