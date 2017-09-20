@@ -15,6 +15,7 @@
  * @package    Doctrine\OrientDB
  * @subpackage Binding
  * @author     Daniele Alessandri <suppakilla@gmail.com>
+ * @author     Christian Ascone   <ascone.christian@gmail.com>
  */
 
 namespace Doctrine\OrientDB\Binding\Adapter;
@@ -41,10 +42,18 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
      */
     public function getData()
     {
-        if (!$this->isValid()) {
+        if (!$this->isValid() && !$this->isPartiallyValid()) {
             throw new InvalidQueryException($this->response->getBody(), $this);
         }
         $body = $this->response->getBody();
+
+        // If response is partially valid, the body must be splitted in order to get
+        // the right json
+        if ($this->isPartiallyValid()) {
+            $exploded = explode("\r\n\r\n", $body, 2);
+            if (count($exploded) > 0)
+                $body = $exploded[count($exploded) - 1];
+        }
 
         if (null === $json = json_decode($body)) {
             if ($this->isValidRid($body)) {
@@ -98,7 +107,7 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
      */
 
     public function getRecordAsString($record = null){
-       return  (string)\GuzzleHttp\json_encode($record ?: $this->getData());
+        return  (string)\GuzzleHttp\json_encode($record ?: $this->getData());
 
     }
 
@@ -108,6 +117,16 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
     public function isValid()
     {
         return in_array($this->response->getStatusCode(), $this->response->getValidStatusCodes());
+    }
+
+    /**
+     * Returns if the response from the server is partially valid (it requires an additional parsing)
+     *
+     * @return boolean
+     */
+    public function isPartiallyValid()
+    {
+        return in_array($this->response->getStatusCode(), $this->response->getPartiallyValidStatusCodes());
     }
 
     /**

@@ -148,7 +148,7 @@ class Record {
 
     /**
      * Gets the Orient Record Content
-     * @return string
+     * @return array
      */
     public function getOData() {
         return $this->oData;
@@ -291,6 +291,11 @@ class Record {
         $this->offsetSet( $name, $value );
     }
 
+    /**
+     * Get a string representation of oData Array
+     *
+     * @return string
+     */
     public function getoDataString(){
         return json_encode($this->getoData());
     }

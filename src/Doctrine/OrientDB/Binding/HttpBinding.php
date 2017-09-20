@@ -15,6 +15,7 @@
  * @package    Doctrine\OrientDB
  * @subpackage Binding
  * @author     Daniele Alessandri <suppakilla@gmail.com>
+ * @author     Christian Ascone   <ascone.christian@gmail.com>
  */
 
 namespace Doctrine\OrientDB\Binding;
