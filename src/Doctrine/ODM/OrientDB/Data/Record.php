@@ -43,8 +43,19 @@ class Record {
         // Add every property (not starting with @ character)
         // in oData array
         foreach ($properties as $key => $property){
-            if(is_string( $key ) && $key[ 0 ] !== '@')
-                $this->oData[$key] = $property;
+            if(is_string( $key ) && $key[ 0 ] !== '@') {
+                $property_to_store = $property;
+                // If $property is an object, convert it to an associative array
+                // https://stackoverflow.com/a/18576902/5746936
+                if (is_object($property_to_store)){
+                    $property_to_store = json_decode(json_encode($property), true);
+                }
+                // If $property is a Rid string (for example #1:25), parse it in a ID object
+                if (is_string($property_to_store) && !empty($property_to_store) && $property_to_store[ 0 ] === '#' && strpos($property_to_store, ':') !== false){
+                    $property_to_store = new ID($property_to_store);
+                }
+                $this->oData[$key] = $property_to_store;
+            }
         }
         // Set other info
         $this->version = $params->{'@version'};
