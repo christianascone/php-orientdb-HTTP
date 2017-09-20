@@ -48,8 +48,10 @@ class Record {
         }
         // Set other info
         $this->version = $params->{'@version'};
-        $this->oClass = $params->{'@class'};
-        $this->rid = new ID($params->{'@rid'});
+        if(property_exists($params,'@class'))
+            $this->oClass = $params->{'@class'};
+        if(property_exists($params, '@rid'))
+            $this->rid = new ID($params->{'@rid'});
     }
 
 
