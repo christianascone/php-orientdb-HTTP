@@ -38,7 +38,9 @@ class Record {
      * Record constructor.
      * @param \stdClass $params
      */
-    public function __construct(\stdClass $params) {
+    public function __construct(\stdClass $params = null) {
+        if (empty($params))
+            return;
         $properties = get_object_vars($params);
         // Add every property (not starting with @ character)
         // in oData array
