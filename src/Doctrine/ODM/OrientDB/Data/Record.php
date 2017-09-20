@@ -148,7 +148,7 @@ class Record {
 
     /**
      * Gets the Orient Record Content
-     * @return string
+     * @return array
      */
     public function getOData() {
         return $this->oData;
@@ -291,12 +291,42 @@ class Record {
         $this->offsetSet( $name, $value );
     }
 
+    /**
+     * Get a string representation of oData Array
+     *
+     * @return string
+     */
     public function getoDataString(){
         return json_encode($this->getoData());
     }
 
+    /**
+     * Get an associative array of Record data
+     * parsing empty EMBEDDABLE fields (namely array parameters)
+     * in null values
+     *
+     * @return array
+     */
+    public function getoDataForPost() {
+        // If oData is empty, returns oData
+        if(empty($this->oData))
+            return $this->getOData();
+        $oDataForPost = [];
+        foreach ($this->oData as $key => $val){
+            // If field is an array (EMEDDABLE) and it is
+            // empty, set it as null
+            if(is_array($val) && empty($val)){
+                $oDataForPost[$key] = null;
+            }else{
+                $oDataForPost[$key] = $val;
+            }
+        }
+
+        return $oDataForPost;
+    }
+
     public function getRecordToPost(){
-        return json_encode($this->getoData() + array('@rid'=>$this->getRid()->jsonSerialize()));
+        return json_encode($this->getoDataForPost() + array('@rid'=>$this->getRid()->jsonSerialize()));
     }
 
 }

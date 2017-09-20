@@ -16,6 +16,7 @@
  * @subpackage Binding
  * @author     Alessandro Nadalin <alessandro.nadalin@gmail.com>
  * @author     Daniele Alessandri <suppakilla@gmail.com>
+ * @author     Christian Ascone   <ascone.christian@gmail.com>
  */
 
 namespace Doctrine\OrientDB\Binding\Client\Http;
@@ -28,6 +29,7 @@ class CurlClientResponse
     protected $body;
     protected $protocol;
 
+    const STATUS_CONTINUE                       = 100;
     const STATUS_OK                             = 200;
     const STATUS_CREATED                        = 201;
     const STATUS_ACCEPTED                       = 202;
@@ -107,7 +109,7 @@ class CurlClientResponse
      * Returns an array for the HTTP status codes that
      * are considered as valid responses.
      *
-     * @return String
+     * @return array
      */
     public function getValidStatusCodes()
     {
@@ -119,6 +121,20 @@ class CurlClientResponse
             self::STATUS_RESET_CONTENT,
             self::STATUS_PARTIAL_CONTENT,
             self::STATUS_CREATED
+        );
+    }
+
+    /**
+     * Returns an array for the HTTP status codes that
+     * are considered as partially valid responses.
+     * They usually requires an additional parsing
+     *
+     * @return array
+     */
+    public function getPartiallyValidStatusCodes()
+    {
+        return array(
+            self::STATUS_CONTINUE
         );
     }
 
