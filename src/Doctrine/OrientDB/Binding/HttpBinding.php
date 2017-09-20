@@ -33,17 +33,21 @@ class HttpBinding implements HttpBindingInterface
     protected $database;
     protected $adapter;
 
+    protected $parse_commands;
+
     /**
      * Instantiates a new binding.
      *
      * @param BindingParameters $parameters
      * @param HttpClientAdapterInterface $adapter
+     * @param Boolean $parse_commands
      */
-    public function __construct(BindingParameters $parameters, HttpClientAdapterInterface $adapter = null)
+    public function __construct(BindingParameters $parameters, HttpClientAdapterInterface $adapter = null, $parse_commands = false)
     {
         $this->server = "{$parameters->getHost()}:{$parameters->getPort()}";
         $this->database = $parameters->getDatabase();
         $this->adapter = $adapter ?: new CurlClientAdapter(new CurlClient());
+        $this->parse_commands = $parse_commands;
 
         $this->setAuthentication($parameters->getUsername(), $parameters->getPassword());
     }
@@ -290,7 +294,13 @@ class HttpBinding implements HttpBindingInterface
 
         $location = $this->getLocation('command', $database, array($language, $query));
 
-        return $this->adapter->request('POST', $location);
+        $response = $this->adapter->request('POST', $location);
+
+        if($this->parse_commands){
+            return $response->getResultAsRecord();
+        }
+
+        return $response;
     }
 
     /**
