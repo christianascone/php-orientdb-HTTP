@@ -72,13 +72,13 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
      * Extract the ResultSet as Object parsed
      * from received JSON and convert every item into
      * a Record
-     * @return Array List of received Record
+     * @return array List of received Record
      */
     public function getResultAsRecord()
     {
         $json = $this->getData();
 
-        $result = isset($json->result) ? $json->result : (isset($json) ? $json : null);
+        $result = isset($json->result) ? $json->result : (isset($json) ? [$json] : null);
 
         $result_record = [];
 
