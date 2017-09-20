@@ -297,7 +297,11 @@ class HttpBinding implements HttpBindingInterface
         $response = $this->adapter->request('POST', $location);
 
         if($this->parse_commands){
-            return $response->getResultAsRecord();
+            $records = $response->getResultAsRecord();
+            if(count($records) == 1) {
+                return $records[0];
+            }
+            return $records;
         }
 
         return $response;
