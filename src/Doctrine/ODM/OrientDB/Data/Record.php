@@ -297,7 +297,7 @@ class Record {
      * @return string
      */
     public function getoDataString(){
-        return json_encode($this->getoData());
+        return json_encode($this->getoDataForPost());
     }
 
     /**
@@ -320,11 +320,23 @@ class Record {
             }else{
                 $oDataForPost[$key] = $val;
             }
+            // In case of ID object, parse it and set it
+            // in string format (for example '#1:25')
+            if($val instanceof ID){
+                $oDataForPost[$key] = $val->jsonSerialize();
+            }
         }
 
         return $oDataForPost;
     }
 
+    /**
+     * Get a string representation of Record which can be used for
+     * document save/update.
+     * It includes Record rid.
+     *
+     * @return string
+     */
     public function getRecordToPost(){
         return json_encode($this->getoDataForPost() + array('@rid'=>$this->getRid()->jsonSerialize()));
     }
