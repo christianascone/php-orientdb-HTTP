@@ -6,7 +6,7 @@ Bare in mind that you should change this path to your cache or tmp path (in Symf
 
 You can change it in 2 lines: register the namespace in your autoloader:
 
-    $classLoader = new SplClassLoader('Doctrine\OrientDB\Proxy', $symfony_root . "/app/cache");
+    $classLoader = new SplClassLoader('christianascone\OrientDB\Proxy', $symfony_root . "/app/cache");
     $classLoader->register();
 
 and when you instantiate the Mapper:

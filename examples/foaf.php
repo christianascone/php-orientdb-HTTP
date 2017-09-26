@@ -1,7 +1,7 @@
 <?php
 
-use Doctrine\OrientDB\Binding\HttpBinding;
-use Doctrine\OrientDB\Binding\BindingParameters;
+use christianascone\OrientDB\Binding\HttpBinding;
+use christianascone\OrientDB\Binding\BindingParameters;
 
 require __DIR__.'/../autoload.php';
 

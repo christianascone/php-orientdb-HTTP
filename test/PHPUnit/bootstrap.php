@@ -30,7 +30,7 @@ deleteTree(__DIR__.'/../../test/proxies/Doctrine/OrientDB/Proxy/test/Integration
 $loader = new ClassLoader();
 
 $loader->addPrefixes(array(
-    'Doctrine\OrientDB\Proxy' => __DIR__.'/../../test/proxies/',
+    'christianascone\OrientDB\Proxy' => __DIR__.'/../../test/proxies/',
     'test' => __DIR__.'/../../',
 ));
 

@@ -31,8 +31,8 @@
     ],
     "autoload": {
         "psr-0": {
-            "Doctrine\\OrientDB": "src/",
-            "Doctrine\\ODM\\OrientDB": "src/"
+            "christianascone\\OrientDB": "src/",
+            "christianascone\\ODM\\OrientDB": "src/"
         }
     },
     "require": {
