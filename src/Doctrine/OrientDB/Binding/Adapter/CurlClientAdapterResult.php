@@ -134,7 +134,7 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
 
     public function isNotFound()
     {
-        return in_array($this->response->getStatusCode(), [$this->response::STATUS_NOT_FOUND]);
+        return in_array($this->response->getStatusCode(), $this->response->getNotFoundCodes());
     }
 
     /**

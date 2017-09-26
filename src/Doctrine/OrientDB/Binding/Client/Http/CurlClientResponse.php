@@ -139,6 +139,13 @@ class CurlClientResponse
         );
     }
 
+    public function getNotFoundCodes()
+    {
+        return array(
+            self::STATUS_NOT_FOUND
+        );
+    }
+
     /**
      * Builds headers array from a well-formatted string.
      *
