@@ -45,6 +45,8 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
         if (!$this->isValid() && !$this->isPartiallyValid() && !$this->isNotFound()) {
             throw new InvalidQueryException($this->response->getBody(), $this);
         }
+
+        // If response is NOT FOUND, returns null
         if ($this->isNotFound()) {
             return null;
         }
@@ -132,6 +134,11 @@ class CurlClientAdapterResult implements HttpBindingResultInterface
         return in_array($this->response->getStatusCode(), $this->response->getPartiallyValidStatusCodes());
     }
 
+    /**
+     * Returns if the item in request is not found
+     *
+     * @return bool
+     */
     public function isNotFound()
     {
         return in_array($this->response->getStatusCode(), $this->response->getNotFoundCodes());

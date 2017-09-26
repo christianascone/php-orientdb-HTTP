@@ -139,6 +139,12 @@ class CurlClientResponse
         );
     }
 
+    /**
+     * Returns an array for the HTTP status codes
+     * considered as "item not found".
+     *
+     * @return array
+     */
     public function getNotFoundCodes()
     {
         return array(
