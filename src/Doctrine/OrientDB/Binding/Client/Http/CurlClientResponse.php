@@ -37,6 +37,7 @@ class CurlClientResponse
     const STATUS_NO_CONTENT                     = 204;
     const STATUS_RESET_CONTENT                  = 205;
     const STATUS_PARTIAL_CONTENT                = 206;
+    const STATUS_NOT_FOUND                      = 404;
 
     /**
      * Constructs a new object from an existing HTTP response.
