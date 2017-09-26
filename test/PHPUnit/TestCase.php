@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TestCase class bound to Doctrine\OrientDB.
+ * TestCase class bound to christianascone\OrientDB.
  *
  * @author Alessandro Nadalin <alessandro.nadalin@gmail.com>
  * @author Daniele Alessandri <suppakilla@gmail.com>
@@ -10,18 +10,18 @@
 namespace test\PHPUnit;
 
 use Doctrine\Common\Proxy\AbstractProxyFactory;
-use Doctrine\ODM\OrientDB\Configuration;
-use Doctrine\ODM\OrientDB\Manager;
-use Doctrine\ODM\OrientDB\Mapper;
-use Doctrine\OrientDB\Binding\HttpBinding;
-use Doctrine\OrientDB\Binding\BindingParameters;
-use Doctrine\OrientDB\Binding\HttpBindingResultInterface;
-use Doctrine\OrientDB\Binding\Adapter\CurlClientAdapter;
-use Doctrine\OrientDB\Binding\Client\Http\CurlClient;
+use christianascone\ODM\OrientDB\Configuration;
+use christianascone\ODM\OrientDB\Manager;
+use christianascone\ODM\OrientDB\Mapper;
+use christianascone\OrientDB\Binding\HttpBinding;
+use christianascone\OrientDB\Binding\BindingParameters;
+use christianascone\OrientDB\Binding\HttpBindingResultInterface;
+use christianascone\OrientDB\Binding\Adapter\CurlClientAdapter;
+use christianascone\OrientDB\Binding\Client\Http\CurlClient;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
-    const COLLECTION_CLASS = '\Doctrine\ODM\OrientDB\Collections\ArrayCollection';
+    const COLLECTION_CLASS = '\christianascone\ODM\OrientDB\Collections\ArrayCollection';
 
     protected function getBindingParameters($options)
     {

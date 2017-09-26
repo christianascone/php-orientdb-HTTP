@@ -1,9 +1,9 @@
 <?php
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;
-use Doctrine\OrientDB\Binding\HttpBinding;
-use Doctrine\OrientDB\Binding\BindingParameters;
-use Doctrine\ODM\OrientDB as ODM;
+use christianascone\OrientDB\Binding\HttpBinding;
+use christianascone\OrientDB\Binding\BindingParameters;
+use christianascone\ODM\OrientDB as ODM;
 
 require __DIR__.'/../autoload.php';
 

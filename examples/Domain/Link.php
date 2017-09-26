@@ -11,7 +11,7 @@
 
 namespace Domain;
 
-use Doctrine\ODM\OrientDB\Mapper\Annotations as ODM;
+use christianascone\ODM\OrientDB\Mapper\Annotations as ODM;
 
 /**
 * @ODM\Document(class="link")

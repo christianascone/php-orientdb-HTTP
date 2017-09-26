@@ -37,8 +37,8 @@ The binding is complete: it is an HTTP client wrapper with some methods bound to
 Its usage is straightforward:
 
 ```
-$parameters = Doctrine\OrientDB\Binding\BindingParameters::create('http://admin:admin@127.0.0.1:2480/demo');
-$orient = new Doctrine\OrientDB\Binding\HttpBinding($parameters);
+$parameters = christianascone\OrientDB\Binding\BindingParameters::create('http://admin:admin@127.0.0.1:2480/demo');
+$orient = new christianascone\OrientDB\Binding\HttpBinding($parameters);
 $output = $orient->query("SELECT FROM Address");
 
 foreach ($output->getResult() as $address) {
@@ -57,7 +57,7 @@ Graph Edition: http://code.google.com/p/orient/wiki/GraphEdTutorial.
 To take advantage of the QB you only have to instantiate a Query object:
 
 ```
-use Doctrine\OrientDB\Query\Query;
+use christianascone\OrientDB\Query\Query;
 
 $query = new Query();
 $query->from(array('users'))->where('username = ?', "admin");
@@ -71,7 +71,7 @@ and so on...
 You can use also those commands:
 
 ```
-use Doctrine\OrientDB\Query\Command\Select;
+use christianascone\OrientDB\Query\Command\Select;
 
 $select = new Select(array('users'));
 echo $select->getRaw();     // SELECT FROM users
@@ -102,9 +102,9 @@ However, it's under heavy work, so don't expect to be able to use it in a few we
 Orient incapsulates also a few utilities for PHP developers: on of them is an implementation of Dijkstra's algorithm.
 
 ```
-use Doctrine\OrientDB\Graph\Graph;
-use Doctrine\OrientDB\Graph\Vertex;
-use Doctrine\OrientDB\Graph\Algorithm\Dijkstra;
+use christianascone\OrientDB\Graph\Graph;
+use christianascone\OrientDB\Graph\Vertex;
+use christianascone\OrientDB\Graph\Algorithm\Dijkstra;
 
 $graph = new Graph();
 

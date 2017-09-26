@@ -21,10 +21,10 @@
 
     <testsuites>
         <testsuite name="OrientDB Client">
-            <directory>test/Doctrine/OrientDB</directory>
+            <directory>test/christianascone/OrientDB</directory>
         </testsuite>
         <testsuite name="OrientDB ODM">
-            <directory>test/Doctrine/ODM/OrientDB</directory>
+            <directory>test/christianascone/ODM/OrientDB</directory>
         </testsuite>
     </testsuites>
 
@@ -38,8 +38,8 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Doctrine/OrientDB/</directory>
-            <directory suffix=".php">src/Doctrine/ODM/OrientDB/</directory>
+            <directory suffix=".php">src/christianascone/OrientDB/</directory>
+            <directory suffix=".php">src/christianascone/ODM/OrientDB/</directory>
         </whitelist>
     </filter>
 
