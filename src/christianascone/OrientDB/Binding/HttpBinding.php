@@ -287,7 +287,7 @@ class HttpBinding implements HttpBindingInterface
     /**
      * {@inheritdoc}
      */
-    public function command($query, $language = BindingInterface::LANGUAGE_SQLPLUS, $database = null)
+    public function command($query, $language = BindingInterface::LANGUAGE_SQLPLUS, $database = null, $force_result_as_array = false)
     {
         $database = $database ?: $this->database;
         $this->ensureDatabase($database);
@@ -298,7 +298,7 @@ class HttpBinding implements HttpBindingInterface
 
         if($this->parse_commands){
             $records = $response->getResultAsRecord();
-            if(count($records) == 1) {
+            if(!$force_result_as_array && count($records) == 1) {
                 return $records[0];
             }
             return $records;
