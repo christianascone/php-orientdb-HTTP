@@ -24,35 +24,51 @@ use christianascone\OrientDB\Binding\Client\Http\CurlClient;
 class CurlClientAdapter implements HttpClientAdapterInterface
 {
     protected $client;
+    protected $retry; // Count of retry
 
     /**
-     * @param CurlClient $client
+     * CurlClientAdapter constructor.
+     * @param CurlClient|null $client
+     * @param int $retry
      */
-    public function __construct(CurlClient $client = null)
+    public function __construct(CurlClient $client = null, int $retry = 3)
     {
         $this->client = $client ?: new CurlClient();
+        $this->retry = $retry;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function request($method, $location, array $headers = null, $body = null)
+    public function request($method, $location, array $headers = null, $body = null, $retry = null)
     {
+        if(is_null($retry)) {
+            $retry = $this->retry;
+        }
         if ($headers) {
             foreach ($headers as $k => $v) {
                 $this->client->setHeader($k, $v);
             }
         }
 
-        switch (strtoupper($method)) {
-            case 'POST':
-            case 'PUT':
-            case 'PATCH':
-                $response = $this->client->$method($location, $body);
-                break;
-            default:
-                $response = $this->client->$method($location);
-                break;
+        try {
+            switch (strtoupper($method)) {
+                case 'POST':
+                case 'PUT':
+                case 'PATCH':
+                    $response = $this->client->$method($location, $body);
+                    break;
+                default:
+                    $response = $this->client->$method($location);
+                    break;
+            }
+        }catch(\Exception $e) {
+            // Check Retry
+            if(!is_null($retry) && $retry > 0) {
+                return $this->request($method, $location, $headers, $body, $retry - 1);
+            }else{
+                throw $e;
+            }
         }
 
         return new CurlClientAdapterResult($response);
