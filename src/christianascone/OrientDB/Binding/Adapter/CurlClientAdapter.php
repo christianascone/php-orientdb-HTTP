@@ -29,11 +29,13 @@ class CurlClientAdapter implements HttpClientAdapterInterface
     /**
      * CurlClientAdapter constructor.
      * @param CurlClient|null $client
-     * @param int $retry
+     * @param null $retry
      */
-    public function __construct(CurlClient $client = null, int $retry = 3)
+    public function __construct(CurlClient $client = null, $retry = null)
     {
         $this->client = $client ?: new CurlClient();
+        if(is_null($retry))
+            $retry = 3;
         $this->retry = $retry;
     }
 
