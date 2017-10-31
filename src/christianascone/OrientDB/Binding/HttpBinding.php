@@ -122,9 +122,6 @@ class HttpBinding implements HttpBindingInterface
         $this->ensureDatabase($database);
         $arguments = array($rid);
 
-        if (is_null($fetchPlan))
-            $fetchPlan = self::FETCH_PLAN;
-
         if ($fetchPlan) {
             $arguments[] = $fetchPlan;
         }
