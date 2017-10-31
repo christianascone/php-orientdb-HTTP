@@ -92,12 +92,15 @@ class HttpBinding implements HttpBindingInterface
     {
         $arguments = array($language, $query);
 
+        if (is_null($fetchPlan))
+            $fetchPlan = self::FETCH_PLAN;
+
+        if (is_null($limit))
+            $limit = -1;
+
         if (isset($limit)) {
             $arguments[] = $limit;
         }
-
-        if (is_null($fetchPlan))
-            $fetchPlan = self::FETCH_PLAN;
 
         if (isset($fetchPlan)) {
             $arguments[] = $fetchPlan;
@@ -284,13 +287,13 @@ class HttpBinding implements HttpBindingInterface
     /**
      * {@inheritdoc}
      */
-    public function execute(Query $query, $fetchPlan = null)
+    public function execute(Query $query, $fetchPlan = "")
     {
         if ($query->getCommand() instanceof Select) {
             return $this->query($query->getRaw(), -1, $fetchPlan);
         }
 
-        return $this->command($query->getRaw());
+        return $this->command($query->getRaw(), HttpBinding::LANGUAGE_SQLPLUS, null, false, true);
     }
 
     /**

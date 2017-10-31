@@ -12,6 +12,7 @@
 
 namespace test\christianascone\OrientDB\Binding;
 
+use christianascone\OrientDB\Binding\BindingInterface;
 use test\PHPUnit\TestCase;
 use christianascone\OrientDB\Binding\HttpBinding;
 use christianascone\OrientDB\Binding\BindingParameters;
@@ -134,7 +135,7 @@ class HttpBindingTest extends TestCase
         $binding = $this->createHttpBinding();
 
         $this->assertHttpStatus(200, $binding->query('SELECT FROM Address'), 'Executes a SELECT');
-        $this->assertHttpStatus(200, $binding->query('SELECT FROM Address', null, 10), 'Executes a SELECT with LIMIT');
+        $this->assertHttpStatus(200, $binding->query('SELECT FROM Address', 10, null), 'Executes a SELECT with LIMIT');
         $this->assertHttpStatus(500, $binding->query("UPDATE Profile SET online = false"), 'Tries to execute an UPDATE with the query command');
     }
 
@@ -286,8 +287,8 @@ class HttpBindingTest extends TestCase
         $binding = new HttpBinding($parameters);
         $binding->setAdapter($adapter);
 
-        $binding->command('SELECT 1');
-        $binding->command('SELECT 2', HttpBinding::LANGUAGE_SQLPLUS, "HIJACKED");
-        $binding->command('SELECT 3');
+        $binding->command('SELECT 1', HttpBinding::LANGUAGE_SQLPLUS,null ,false, true);
+        $binding->command('SELECT 2', HttpBinding::LANGUAGE_SQLPLUS, "HIJACKED",false, true);
+        $binding->command('SELECT 3', HttpBinding::LANGUAGE_SQLPLUS,null ,false, true);
     }
 }

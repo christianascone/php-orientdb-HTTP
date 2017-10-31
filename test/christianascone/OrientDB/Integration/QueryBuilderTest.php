@@ -538,7 +538,7 @@ class QueryBuilderTest extends TestCase
     protected function doQuery($query, HttpBinding $binding = null)
     {
         $binding = $binding ?: $this->binding;
-        $result = $binding->command($query->getRaw());
+        $result = $binding->command($query->getRaw(), HttpBinding::LANGUAGE_SQLPLUS,null ,false, true);
 
         return $result;
     }
