@@ -307,7 +307,8 @@ class HttpBinding implements HttpBindingInterface
 
         // If query does not contain a 'fetch plan' specification and the skip parameter is not true, set default
         // fetch plan
-        if (!$skip_fetch_plan && is_string($query) && !empty($query) && strpos($query, self::FETCH_PLAN_STRING) === false){
+        $notContainsFetchPlan = $this->queryNotContainsFetchPlan($query);
+        if (!$skip_fetch_plan && is_string($query) && $notContainsFetchPlan){
             $query .= " " . self::FETCH_PLAN_STRING . " " . self::FETCH_PLAN;
         }
         $location = $this->getLocation('command', $database, array($language, $query));
@@ -323,6 +324,16 @@ class HttpBinding implements HttpBindingInterface
         }
 
         return $response;
+    }
+
+    /**
+     * Checks if the query string contains the fetch plan and it can be included within.
+     *
+     * @param $query
+     * @return bool
+     */
+    private function queryNotContainsFetchPlan($query) {
+        return !empty($query) && strpos($query, self::FETCH_PLAN_STRING) === false && strpos($query, "CREATE EDGE") === false && strpos($query, "CREATE INDEX") === false && strpos($query, "UPDATE ") === false && strpos($query, "DELETE ") === false && strpos($query, "TRUNCATE CLASS ") === false;
     }
 
     /**
