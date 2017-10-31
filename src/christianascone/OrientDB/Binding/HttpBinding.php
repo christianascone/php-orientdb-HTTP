@@ -29,6 +29,10 @@ use christianascone\OrientDB\Exception as OrientException;
 
 class HttpBinding implements HttpBindingInterface
 {
+    // Default fetch plan in order to avoid edges
+    const FETCH_PLAN_STRING = "fetchplan";
+    const FETCH_PLAN = "[*]in_*:-2 out_*:-2";
+
     protected $server;
     protected $database;
     protected $adapter;
@@ -60,7 +64,7 @@ class HttpBinding implements HttpBindingInterface
      * @param array $arguments
      * @return string
      */
-    protected function getLocation($method, $database = null, array $arguments = null)
+    protected function getLocation($method, $database = null, array $arguments = null, $fetchPlan = null)
     {
         $location = "http://{$this->server}/$method";
 
@@ -88,6 +92,12 @@ class HttpBinding implements HttpBindingInterface
     {
         $arguments = array($language, $query);
 
+        if (is_null($fetchPlan))
+            $fetchPlan = self::FETCH_PLAN;
+
+        if (is_null($limit))
+            $limit = -1;
+
         if (isset($limit)) {
             $arguments[] = $limit;
         }
@@ -111,6 +121,9 @@ class HttpBinding implements HttpBindingInterface
     {
         $this->ensureDatabase($database);
         $arguments = array($rid);
+
+        if (is_null($fetchPlan))
+            $fetchPlan = self::FETCH_PLAN;
 
         if ($fetchPlan) {
             $arguments[] = $fetchPlan;
@@ -274,24 +287,29 @@ class HttpBinding implements HttpBindingInterface
     /**
      * {@inheritdoc}
      */
-    public function execute(Query $query, $fetchPlan = null)
+    public function execute(Query $query, $fetchPlan = "")
     {
         if ($query->getCommand() instanceof Select) {
             return $this->query($query->getRaw(), -1, $fetchPlan);
         }
 
-        return $this->command($query->getRaw());
+        return $this->command($query->getRaw(), HttpBinding::LANGUAGE_SQLPLUS, null, false, true);
     }
 
     /**
     /**
      * {@inheritdoc}
      */
-    public function command($query, $language = BindingInterface::LANGUAGE_SQLPLUS, $database = null, $force_result_as_array = false)
+    public function command($query, $language = BindingInterface::LANGUAGE_SQLPLUS, $database = null, $force_result_as_array = false, $skip_fetch_plan = false)
     {
         $database = $database ?: $this->database;
         $this->ensureDatabase($database);
 
+        // If query does not contain a 'fetch plan' specification and the skip parameter is not true, set default
+        // fetch plan
+        if (!$skip_fetch_plan && is_string($query) && !empty($query) && strpos($query, self::FETCH_PLAN_STRING) === false){
+            $query .= " " . self::FETCH_PLAN_STRING . " " . self::FETCH_PLAN;
+        }
         $location = $this->getLocation('command', $database, array($language, $query));
 
         $response = $this->adapter->request('POST', $location);

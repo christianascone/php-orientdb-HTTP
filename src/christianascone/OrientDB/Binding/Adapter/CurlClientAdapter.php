@@ -64,6 +64,8 @@ class CurlClientAdapter implements HttpClientAdapterInterface
                     $response = $this->client->$method($location);
                     break;
             }
+            if (!is_null($retry) && $retry > 0 && $response->getStatusCode() >= 400 && $response->getStatusCode() < 500)
+                return $this->request($method, $location, $headers, $body, $retry - 1);
         }catch(\Exception $e) {
             // Check Retry
             if(!is_null($retry) && $retry > 0) {
